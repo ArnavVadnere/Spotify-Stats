@@ -26,9 +26,10 @@ export default function Stats({ token }) {
         })
         .then((response) => {
             const data = response.data.items;
-            // console.log(response.data);
             setData({ data });
             console.log(response.data.items);
+            console.log("addy: "  + window.location.href);
+
             {getArrayArtists(data)}
         })
     }
