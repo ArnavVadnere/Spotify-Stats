@@ -2,7 +2,48 @@
     align-items: center;
 }
 
+
 p {
-    text-align: center;
+    /* text-align: center; */
 }
 
+/* img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+} */
+
+#zeroimg {
+    width:240px;
+}
+
+#oneimg {
+    width:140px;
+}
+
+#twoimg {
+    width:100px;
+}
+#div0{
+    font-size: 5em;
+    margin-top: .5em; 
+}
+
+#p0{
+    margin-top: .8em; 
+    margin-bottom: .8em;
+}
+#div1 {
+    font-size: 4em;
+}
+#div2 {
+    font-size: 2em;
+}
+
+#button {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}

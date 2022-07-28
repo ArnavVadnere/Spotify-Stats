@@ -28,38 +28,78 @@ export default function Stats({ token }) {
             const data = response.data.items;
             setData({ data });
             console.log(response.data.items);
-            console.log("addy: "  + window.location.href);
 
             {getArrayArtists(data)}
         })
     }
-    
-    const getArrayArtists = async (data) => {
-        var topArtists = [];
-        var size = 5;
+    function createMainDiv(){
+        const main = document.createElement("div");
+        main.setAttribute("id", "main");
+    }
+    function createDivs(){
+        //create divs 
+        
+        
+
         for (let i = 0; i < 50; i++){
+            
+            if(i===0){
+                createMainDiv();
+                
+            }
+            
+            
             const newDiv = document.createElement("div");
-            newDiv.setAttribute("id", i);
+            newDiv.setAttribute("id", "div01" + i);
 
             const newContent = document.createTextNode("");
 
             newDiv.appendChild(newContent);
 
-            const currentDiv = document.getElementById("maindiv");
+            const currentDiv = document.getElementById("mainDiv");
             document.body.insertBefore(newDiv, currentDiv);
+            document.getElementById("mainDiv").appendChild(newDiv);
         }
+    }
 
+    const top3Format = async (i, data, idNum) => {
+        var element = document.getElementById("div" + i);
+
+        const img = document.createElement("img");
+        const link = data[i]['images'][0]['url'];
+
+        img.setAttribute("src", link);
+        img.setAttribute("id", idNum + "img");
+        document.getElementById("div" + i).appendChild(img);
+        // element.images.resi resive image
+    }
+
+    const getArrayArtists = async (data) => {
+        createDivs();
+
+        var topArtists = [];
+        //populate divs with paragraphs
         for (let i = 0; i < 50; i++){
             topArtists[i] = data[i]['name'];
 
             const newP = document.createElement("p")
 
-            const newContent = document.createTextNode((JSON.stringify(topArtists[i], null, 2)).replace(/^"(.+(?="$))"$/, '$1'));
+            const newContent = document.createTextNode((i + 1) + ": " + (JSON.stringify(topArtists[i], null, 2)).replace(/^"(.+(?="$))"$/, '$1'));
+
             newP.appendChild(newContent);
+            newP.setAttribute("id", "p" + i);
+            if(i === 0){
+                top3Format(i, data, "zero");
+                
+            }
+            else if(i === 1){
+                top3Format(i, data, "one");
+            }
+            else if(i === 2){
+                top3Format(i, data, "two");
+            }
 
-            const currentDiv = document.getElementById(i);
-
-            document.getElementById(i).appendChild(newP);
+            document.getElementById("div" + i).appendChild(newP);
 
         }
         setTopArtists(topArtists);
@@ -68,11 +108,23 @@ export default function Stats({ token }) {
     }
 return(
     <div>
-        <h1>Top Artists</h1>
-        <button onClick={getTopArtists}>  
-        {/*make button disapear*/ }
-            Get Artists
+        <h1>Stats for Spotify</h1>
+        <div id="button">
+            <button onClick={getTopArtists}>  
+            {/*make button disapear and add time range and get currently playing*/ }
+                Get Artists
+            </button>
+        </div>
+        
+
+        {/* <button onClick={getTopTracks}>
+            Get Tracks
         </button>
+
+        <button onClick={getTopGenres}>
+            Get Genres
+        </button> */}
+
     </div>
 )
 }
