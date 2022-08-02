@@ -3,54 +3,45 @@ import './Stats.css';
 import axios from 'axios';
 
 export default function Stats({ token }) {
-    // const [topTracks, setTopTracks] = useState([]);
-    // const [topTracksActivated, setTopTracksActivated] = useState(false);
+
     const [topArtists, setTopArtists] = useState([]);
-    // const [topArtistsActivated, setTopArtistsActivated] = useState(false);
     const [data, setData] = useState({});
     const ENDPOINT = "https://api.spotify.com/v1/me/top/artists";
     const headers = {
         Accept: 'application/json',
-            Authorization: 'Bearer ' + token,
-            'Content-Type': 'application/json'
+        Authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json'
     };
-    
+
 
     const getTopArtists = async (token) => {
-        
 
-        await  axios
-        .get(ENDPOINT, {
-          params: { limit: 500, offset: 0 },
-          headers: headers,
-        })
-        .then((response) => {
-            const data = response.data.items;
-            setData({ data });
-            console.log(response.data.items);
 
-            {getArrayArtists(data)}
-        })
+        await axios
+            .get(ENDPOINT, {
+                params: { limit: 500, offset: 0 },
+                headers: headers,
+            })
+            .then((response) => {
+                const data = response.data.items;
+                setData({ data });
+                console.log(response.data.items);
+
+                { getArrayArtists(data) }
+            })
     }
-    function createMainDiv(){
-        const main = document.createElement("div");
-        main.setAttribute("id", "main");
-    }
-    function createDivs(){
+
+    function createDivs() {
         //create divs 
-        
-        
 
-        for (let i = 0; i < 50; i++){
-            
-            if(i===0){
-                createMainDiv();
-                
-            }
-            
-            
+        console.log("inside");
+        const main = document.createElement("p");
+        main.setAttribute("id", "main");
+        for (let i = 0; i < 50; i++) {
+            const main = document.createElement("p");
+            main.setAttribute("id", "main");
             const newDiv = document.createElement("div");
-            newDiv.setAttribute("id", "div01" + i);
+            newDiv.setAttribute("id", "div" + i);
 
             const newContent = document.createTextNode("");
 
@@ -58,7 +49,7 @@ export default function Stats({ token }) {
 
             const currentDiv = document.getElementById("mainDiv");
             document.body.insertBefore(newDiv, currentDiv);
-            document.getElementById("mainDiv").appendChild(newDiv);
+            // document.getElementById("mainDiv").appendChild(newDiv);
         }
     }
 
@@ -79,7 +70,7 @@ export default function Stats({ token }) {
 
         var topArtists = [];
         //populate divs with paragraphs
-        for (let i = 0; i < 50; i++){
+        for (let i = 0; i < 50; i++) {
             topArtists[i] = data[i]['name'];
 
             const newP = document.createElement("p")
@@ -88,14 +79,14 @@ export default function Stats({ token }) {
 
             newP.appendChild(newContent);
             newP.setAttribute("id", "p" + i);
-            if(i === 0){
+            if (i === 0) {
                 top3Format(i, data, "zero");
-                
+
             }
-            else if(i === 1){
+            else if (i === 1) {
                 top3Format(i, data, "one");
             }
-            else if(i === 2){
+            else if (i === 2) {
                 top3Format(i, data, "two");
             }
 
@@ -106,18 +97,16 @@ export default function Stats({ token }) {
 
 
     }
-return(
-    <div>
-        <h1>Stats for Spotify</h1>
-        <div id="button">
-            <button onClick={getTopArtists}>  
-            {/*make button disapear and add time range and get currently playing*/ }
+    return (
+        <div className="Stats">
+            <h1>Stats for Spotify</h1>
+            <button id="button" onClick={getTopArtists}>
+                {/*make button disapear and add time range and get currently playing*/}
                 Get Artists
             </button>
-        </div>
-        
 
-        {/* <button onClick={getTopTracks}>
+
+            {/* <button onClick={getTopTracks}>
             Get Tracks
         </button>
 
@@ -125,7 +114,7 @@ return(
             Get Genres
         </button> */}
 
-    </div>
-)
+        </div>
+    )
 }
 
