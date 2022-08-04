@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import './Stats.css';
 import axios from 'axios';
 
-export default function Stats({ token }) {
+export default function Stats({token}) {
 
     const [topArtists, setTopArtists] = useState([]);
     const [data, setData] = useState({});
@@ -99,7 +99,7 @@ export default function Stats({ token }) {
     }
     return (
         <div className="Stats">
-            <h1>Stats for Spotify</h1>
+            <h1>Stats for Spotify{token}</h1>
             <button id="button" onClick={getTopArtists}>
                 {/*make button disapear and add time range and get currently playing*/}
                 Get Artists

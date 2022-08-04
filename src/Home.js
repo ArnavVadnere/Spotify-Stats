@@ -4,7 +4,8 @@ import hash from "./hash";
 import Stats from "./Stats.js";
 import { authEndpoint, clientId, redirectUri, scopes } from "./config_example";
 import { Route, Link } from 'react-router-dom';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+
 
 function Home() {
     const [token, setToken] = useState(null);
@@ -22,7 +23,7 @@ function Home() {
 
 
             <div id="info">
-                <h2>Your Spotify Stats</h2>
+                <h2>Your Spotify Stats{token}</h2>
                 <p>Get Statistcs about your top artists, songs and genres from Spotify.</p>
             </div>
 
@@ -47,5 +48,4 @@ function Home() {
         </div>
     );
 }
-
 export default Home;
