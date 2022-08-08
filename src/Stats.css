@@ -3,10 +3,6 @@
 }
 
 
-p {
-    /* text-align: center; */
-}
-
 /* img {
     display: block;
     margin-left: auto;
@@ -46,4 +42,8 @@ p {
     margin-right: auto;
     margin-top: 1em;
     margin-bottom: 1em;
+}
+
+#mainDiv p {
+    color: white;
 }

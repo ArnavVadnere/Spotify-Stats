@@ -8,14 +8,15 @@ import Footer from "./Footer.js";
 
 function App() {
 
+  const [token, setToken] = useState("");
 
   return (
     <div className="App">
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/redirect" element={<Stats />} />
+        <Route path="/" element={<Home setToken={setToken} token={token}  />} />
+        <Route path="/redirect" element={<Stats token={token} />} />
       </Routes>
       {/* <Footer /> */}
     </Router>
