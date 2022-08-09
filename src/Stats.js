@@ -32,7 +32,7 @@ export default function Stats({ token }) {
       .then((response) => {
         const data = response.data.items;
         setData({ data });
-        console.log(response.data.items);
+        // console.log(response.data.items);
 
         {
           getArrayArtists(data);
@@ -107,8 +107,7 @@ export default function Stats({ token }) {
   };
   return (
     <div className="Stats">
-      {navigate("/top/artists")}
-      {getTopArtists}
+      {getTopArtists()}
     </div>
   );
 }

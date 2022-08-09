@@ -6,6 +6,7 @@
 *.log
 logs
 node_modules
+.cache
 **/*.backup.*
 **/*.back.*
 
@@ -18,8 +19,6 @@ psd
 thumb
 sketch
 
-# Ignore all text files
-*.txt
 
 # Ignore files related to API keys
 .env

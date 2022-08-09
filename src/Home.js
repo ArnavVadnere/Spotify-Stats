@@ -7,11 +7,20 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Footer from "./Footer.js";
 import Stats from "./Stats";
+import axios from "axios";
+
 
 function Home({ setToken, token }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [visible, setVisible] = useState(false);
+  const [data, setData] = useState({});
+  let counter = 0;
+  const headers = {
+    Accept: "application/json",
+    Authorization: "Bearer " + token,
+    "Content-Type": "application/json",
+  };
 
   useEffect(() => {
     var mToken = hash.access_token;
@@ -20,17 +29,35 @@ function Home({ setToken, token }) {
       {
         console.log("SET TOKEN COMPLETE");
         setVisible(true);
-
+        if(counter < 3){
+          getUserProfile();
+          console.log("I JUST RAN");
+        }
+        counter++;
         // hide login button and show 3 buttons
         // {<Footer />}
       }
     }
   });
 
+  const getUserProfile = async () => {
+    await axios
+      .get("https://api.spotify.com/v1/me", {
+        headers: headers,
+      })
+      .then((response) => {
+        const data = response.data.items;
+        setData({ data });
+        console.log("User data: " + response);
+
+      });
+  };
+
   return (
     <div className="Home">
       <div id="info">
         <h2>Your Spotify Stats</h2>
+        <p>{token}</p>
         <p>
           Get Statistcs about your top artists, songs and genres from Spotify.
         </p>
@@ -54,7 +81,7 @@ function Home({ setToken, token }) {
         {visible && (
           <div className="newButtons">
             <div>
-              <button id="button">Get Top Artists</button>
+              <button id="button" onClick={() => { navigate("/artists") }}>Get Top Artists</button>
             </div>
             <div>
               <button id="button">Get Top Songs</button>
@@ -67,7 +94,7 @@ function Home({ setToken, token }) {
       </div>
     </div>
 
-    
+
   );
 }
 export default Home;

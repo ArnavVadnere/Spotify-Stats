@@ -16,7 +16,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home setToken={setToken} token={token}  />} />
-        <Route path="/redirect" element={<Stats token={token} />} />
+        <Route path="/artists" element={<Stats token={token} />} />
       </Routes>
       {/* <Footer /> */}
     </Router>
