@@ -1,0 +1,6 @@
+1. after token is generated, login button on landing page gets replaced with the three buttons(artistsm, genres and songs)
+2. create new pages for genres and songs
+3. create user profile in NAV bar or top of every page
+4. beter organize data 
+5. create range 
+6. ML model to create playlist simlar to top songs
