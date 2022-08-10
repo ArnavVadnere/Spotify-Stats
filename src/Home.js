@@ -16,6 +16,7 @@ function Home({ setToken, token }) {
   const [visible, setVisible] = useState(false);
   const [data, setData] = useState({});
   let counter = 0;
+
   const headers = {
     Accept: "application/json",
     Authorization: "Bearer " + token,
@@ -34,7 +35,6 @@ function Home({ setToken, token }) {
           console.log("I JUST RAN");
         }
         counter++;
-        // hide login button and show 3 buttons
         // {<Footer />}
       }
     }
@@ -49,7 +49,6 @@ function Home({ setToken, token }) {
         const data = response.data.items;
         setData({ data });
         console.log("User data: " + response);
-
       });
   };
 
