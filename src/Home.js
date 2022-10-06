@@ -10,53 +10,29 @@ import Stats from "./Stats";
 import axios from "axios";
 
 
-function Home({ setToken, token }) {
+function Home({ setToken, token, setVisible, visible }) {
   const navigate = useNavigate();
   const location = useLocation();
-  const [visible, setVisible] = useState(false);
   const [data, setData] = useState({});
-  let counter = 0;
-
-  const headers = {
-    Accept: "application/json",
-    Authorization: "Bearer " + token,
-    "Content-Type": "application/json",
-  };
 
   useEffect(() => {
     var mToken = hash.access_token;
     if (mToken) {
       setToken(mToken);
       {
-        console.log("SET TOKEN COMPLETE");
+        // console.log("SET TOKEN COMPLETE");
         setVisible(true);
-        if(counter < 3){
-          getUserProfile();
-          console.log("I JUST RAN");
-        }
-        counter++;
         // {<Footer />}
       }
     }
   });
 
-  const getUserProfile = async () => {
-    await axios
-      .get("https://api.spotify.com/v1/me", {
-        headers: headers,
-      })
-      .then((response) => {
-        const data = response.data.items;
-        setData({ data });
-        console.log("User data: " + response);
-      });
-  };
+ 
 
   return (
     <div className="Home">
       <div id="info">
         <h2>Your Spotify Stats</h2>
-        <p>{token}</p>
         <p>
           Get Statistcs about your top artists, songs and genres from Spotify.
         </p>
@@ -83,7 +59,7 @@ function Home({ setToken, token }) {
               <button id="button" onClick={() => { navigate("/artists") }}>Get Top Artists</button>
             </div>
             <div>
-              <button id="button">Get Top Songs</button>
+              <button id="button" onClick={() => { navigate("/songs") }}>Get Top Songs</button>
             </div>
             <div>
               <button id="button">Get Top Genres</button>

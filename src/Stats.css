@@ -15,7 +15,7 @@
 }
 
 #oneimg {
-    width:140px;
+    width:180px;
 }
 
 #twoimg {
@@ -44,6 +44,6 @@
     margin-bottom: 1em;
 }
 
-#mainDiv p {
+#Artists p, #Songs p {
     color: white;
 }
