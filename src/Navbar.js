@@ -4,42 +4,67 @@ import { Redirect } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Col } from "react-bootstrap";
 
 function Navbar({ visible, token }) {
   const navigate = useNavigate();
+  const ENDPOINT = "https://api.spotify.com/v1/me";
   const headers = {
     Accept: "application/json",
     Authorization: "Bearer " + token,
     "Content-Type": "application/json",
   };
-  const ENDPOINT = "https://api.spotify.com/v1/me";
-  const [user, setUser] = useState("");
 
-  // useEffect(() => {
-  //   if (visible) {
-  //     getUserProfile();
-  //     // console.log("getting user profile");
-  //   }
-  // }, [visible]);
+  useEffect(() => {
+    if (token != "") {
+      getUserInfo();
+      return;
+    }
+    return;
+  }, [token]);
 
-  // const getUserProfile = async () => {
-  //   await axios
-  //     .get(ENDPOINT, {
-  //       headers: headers,
-  //     })
-  //     .then((response) => {
-  //       const data = response.data.items;
-  //       setUser({ data });
-  //       // console.log(response.data.items);
+  const getUserInfo = async () => {
+    await axios
+      .get(ENDPOINT, {
+        // params: { limit: 500, offset: 0 },
+        headers: headers,
+      })
+      .then((response) => {
+        const data = response.data.items;;
+        { 
+              outputUser(data);
+        }
+      });
+  };
 
-  //       {
-  //         printData(data);
-  //       }
-  //     });
-  // };
-  // const printData = async (data) => {
-  //   // console.log(data);
-  // }
+  const outputUser = async (data) => {
+    const displayName = data;
+    const displayPicture = "hello";
+
+    // const newP = document.createElement("p");
+
+    //   let newContent = document.createTextNode(
+    //     displayName
+    //   );
+
+    //   newP.appendChild(newContent);
+    //   newP.setAttribute("id", "displayName");
+
+    //   const newDP = document.createElement("img");
+
+    //   newContent = document.createTextNode(
+    //     displayPicture
+    //   );
+
+    //   newDP.appendChild(newContent);
+    //   newDP.setAttribute("id", "displayPicture");
+
+    //   document.getElementById("userInfo").appendChild(newP);
+    //   document.getElementById("userInfo").appendChild(newDP);
+
+
+  }
+  
 
   return (
     <nav>
@@ -56,7 +81,10 @@ function Navbar({ visible, token }) {
         ></img>
         <h1>Spotify Stats</h1>
       </div>
+      
+      <div className="userInfo">
 
+      </div>
       
     </nav>
   );

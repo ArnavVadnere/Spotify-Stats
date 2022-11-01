@@ -6,6 +6,7 @@ import Stats from "./Stats.js";
 import Footer from "./Footer.js";
 import Artists from "./artists.js"
 import Songs from "./songs.js"
+import Genres from "./genres";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/" element={<Home setToken={setToken} token={token} setVisible={setVisible} visible={visible}/>} />
         <Route path="/artists" element={<Artists token={token} />} />
         <Route path="/songs" element={<Songs token={token} />} />
+        <Route path="/genres" element={<Genres token={token} />} />
       </Routes>
       {/* <Footer /> */}
     </Router>

@@ -18,18 +18,66 @@ export default function Stats({ token }) {
   };
 
   useEffect(() => {
-    
     if (token === "") {
       navigate("/");
       return;
-    }
-    else{
+    } else {
+      getTopGenres1();
       getTopArtists();
       getTopSongs();
     }
 
     return;
   }, [token]);
+
+  const getTopGenres = async (data) => {
+    //get all occurances of each genres of each top song and rank greatest to least
+
+    const topGenres = [];
+    //get all geners into topGenres
+    for (let i = 0; i < 50; i++) {
+      for (let j = 0; j < data[i]["genres"].length; j++) {
+        topGenres.push(data[i]["genres"][j]);
+      }
+    }
+
+    //count occurances for each genre
+    const count = {};
+    topGenres.forEach((e) => (count[e] ? count[e]++ : (count[e] = 1)));
+
+    //sort all least to greatest
+    const sortable = Object.entries(count)
+      .sort(([, a], [, b]) => a - b)
+      .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
+    //reverse into reserved array
+    const keys = Object.keys(sortable);
+    const reversed = keys.reverse();
+
+    createDivsGenres();
+    //print out data into topGenres page
+    for (let i = 0; i < 50; i++) {
+      const newP = document.createElement("p");
+
+      const newContent = document.createTextNode(
+        i +
+          1 +
+          ": " +
+          JSON.stringify(reversed[i], null, 2).replace(/^"(.+(?="$))"$/, "$1")
+      );
+
+      newP.appendChild(newContent);
+      newP.setAttribute("id", "p" + i);
+      // if (i === 0) {
+      //   top3FormatSongs(i, data, "zero");
+      // } else if (i === 1) {
+      //   top3FormatSongs(i, data, "one");
+      // } else if (i === 2) {
+      //   top3FormatSongs(i, data, "two");
+      // }
+
+      document.getElementById("div" + i).appendChild(newP);
+    }
+  };
 
   const getTopSongs = async () => {
     await axios
@@ -41,10 +89,8 @@ export default function Stats({ token }) {
         const data = response.data.items;
         setData({ data });
 
-        { 
-              console.log("INSFSF");
-              console.log(data);
-              getArraySongs(data);
+        {
+          getArraySongs(data);
         }
       });
   };
@@ -81,7 +127,6 @@ export default function Stats({ token }) {
   };
 
   const top3FormatSongs = async (i, data, idNum) => {
-
     const img = document.createElement("img");
     const link = data[i]["album"]["images"][0]["url"];
 
@@ -89,7 +134,6 @@ export default function Stats({ token }) {
     img.setAttribute("id", idNum + "img");
     document.getElementById("div" + i).appendChild(img);
   };
-
 
   const getTopArtists = async () => {
     await axios
@@ -100,9 +144,25 @@ export default function Stats({ token }) {
       .then((response) => {
         const data = response.data.items;
         setData({ data });
-        { 
-              console.log(data);
-              getArrayArtists(data);
+        {
+          getArrayArtists(data);
+        }
+      });
+  };
+
+  const getTopGenres1 = async () => {
+    await axios
+      .get(ENDPOINT, {
+        params: { limit: 500, offset: 0 },
+        headers: headers,
+      })
+      .then((response) => {
+        const data = response.data.items;
+        setData({ data });
+        {
+          
+          //call top genres and pass top song data into
+          getTopGenres(data);
         }
       });
   };
@@ -122,6 +182,21 @@ export default function Stats({ token }) {
     }
   }
 
+  function createDivsGenres() {
+    for (let i = 0; i < 50; i++) {
+      const main = document.createElement("p");
+      main.setAttribute("id", "main");
+      const newDiv = document.createElement("div");
+      newDiv.setAttribute("id", "div" + i);
+
+      const newContent = document.createTextNode("");
+
+      newDiv.appendChild(newContent);
+
+      document.getElementById("Genres").appendChild(newDiv);
+    }
+  }
+
   function createDivs() {
     for (let i = 0; i < 50; i++) {
       const main = document.createElement("p");
@@ -137,9 +212,7 @@ export default function Stats({ token }) {
     }
   }
 
-  
   const top3Format = async (i, data, idNum) => {
-
     const img = document.createElement("img");
     const link = data[i]["images"][0]["url"];
 
@@ -179,9 +252,5 @@ export default function Stats({ token }) {
     }
     setTopArtists(topArtists);
   };
-  return (
-    <div className="Stats">
-      
-    </div>
-  );
+  return <div className="Stats"></div>;
 }

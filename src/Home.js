@@ -62,7 +62,7 @@ function Home({ setToken, token, setVisible, visible }) {
               <button id="button" onClick={() => { navigate("/songs") }}>Get Top Songs</button>
             </div>
             <div>
-              <button id="button">Get Top Genres</button>
+            <button id="button" onClick={() => { navigate("/genres") }}>Get Top Genres</button>
             </div>
           </div>
         )}

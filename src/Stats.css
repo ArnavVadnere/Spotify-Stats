@@ -44,6 +44,6 @@
     margin-bottom: 1em;
 }
 
-#Artists p, #Songs p {
+#Artists p, #Songs p, #Genres p {
     color: white;
 }
