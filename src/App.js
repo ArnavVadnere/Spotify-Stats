@@ -25,7 +25,6 @@ function App() {
         <Route path="/songs" element={<Songs token={token} />} />
         <Route path="/genres" element={<Genres token={token} />} />
       </Routes>
-      {/* <Footer /> */}
     </Router>
   </div>
 

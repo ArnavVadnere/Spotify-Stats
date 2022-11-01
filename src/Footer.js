@@ -1,13 +1,14 @@
 import React from "react";
+import "./Stats.css";
 
 function Footer() {
     return (
-        <footer className="page-footer font-small white">
-
-            <div className="footer-copyright text-center py-3">Website created by Arnav Vadnere
-            <i className="bi bi-linkedin"></i>
+        <footer>
+            <div class="footer">
+            Website created by Arnav Vadnere
             </div>
         </footer>
+    
     )
 }
 

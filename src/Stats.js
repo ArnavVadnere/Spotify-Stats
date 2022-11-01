@@ -252,5 +252,7 @@ export default function Stats({ token }) {
     }
     setTopArtists(topArtists);
   };
-  return <div className="Stats"></div>;
+  return (
+  <div className="Stats"></div>
+  );
 }
