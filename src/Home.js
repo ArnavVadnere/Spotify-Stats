@@ -37,7 +37,6 @@ function Home({ setToken, token, setVisible, visible }) {
           Get Statistcs about your top artists, songs and genres from Spotify.
         </p>
       </div>
-
       <div id="token">
         {!visible && (
           <button id="button">
@@ -67,6 +66,7 @@ function Home({ setToken, token, setVisible, visible }) {
           </div>
         )}
       </div>
+      {/* <Footer /> */}
     </div>
 
 
