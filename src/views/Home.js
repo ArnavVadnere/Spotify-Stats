@@ -1,14 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./App.css";
-import hash from "./hash";
-import { authEndpoint, clientId, redirectUri, scopes } from "./config_example";
+import hash from "../utils/hash";
+import {
+  authEndpoint,
+  clientId,
+  redirectUri,
+  scopes,
+} from "../utils/config_example";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import Footer from "./Footer.js";
+import Footer from "../components/Footer.js";
 import Stats from "./Stats";
 import axios from "axios";
-
 
 function Home({ setToken, token, setVisible, visible }) {
   const navigate = useNavigate();
@@ -26,8 +30,6 @@ function Home({ setToken, token, setVisible, visible }) {
       }
     }
   });
-
- 
 
   return (
     <div className="Home">
@@ -55,21 +57,40 @@ function Home({ setToken, token, setVisible, visible }) {
         {visible && (
           <div className="newButtons">
             <div>
-              <button id="button" onClick={() => { navigate("/artists") }}>Get Top Artists</button>
+              <button
+                id="button"
+                onClick={() => {
+                  navigate("/artists");
+                }}
+              >
+                Get Top Artists
+              </button>
             </div>
             <div>
-              <button id="button" onClick={() => { navigate("/songs") }}>Get Top Songs</button>
+              <button
+                id="button"
+                onClick={() => {
+                  navigate("/songs");
+                }}
+              >
+                Get Top Songs
+              </button>
             </div>
             <div>
-            <button id="button" onClick={() => { navigate("/genres") }}>Get Top Genres</button>
+              <button
+                id="button"
+                onClick={() => {
+                  navigate("/genres");
+                }}
+              >
+                Get Top Genres
+              </button>
             </div>
           </div>
         )}
       </div>
       {/* <Footer /> */}
     </div>
-
-
   );
 }
 export default Home;

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./App.css";
-import Stats from "./views/Stats";
+import Stats from "./Stats";
 import { useNavigate } from "react-router-dom";
 
-function Artists({ token }) {
+function Songs({ token }) {
   const navigate = useNavigate();
 
   // useEffect(() => {
@@ -16,9 +16,9 @@ function Artists({ token }) {
   // }, [token]);
 
   return (
-    <div id="Artists">
+    <div id="Songs">
       <Stats token={token} />
     </div>
   );
 }
-export default Artists;
+export default Songs;
